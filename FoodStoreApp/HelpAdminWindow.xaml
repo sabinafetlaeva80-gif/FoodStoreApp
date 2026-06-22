@@ -1,0 +1,155 @@
+<Window x:Class="FoodStoreApp.HelpAdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Руководство администратора" Height="650" Width="700"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="#f5f6fa">
+
+    <Border Background="White" CornerRadius="10" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <Border Background="#2C3E50" CornerRadius="10,10,0,0" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Руководство администратора" FontSize="20" FontWeight="Bold"
+                               Foreground="White" TextAlignment="Center"/>
+                    <TextBlock Text="Инструкция по управлению системой М-Маркет"
+                               FontSize="12" Foreground="#BDC3C7" TextAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Содержание -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20">
+                    <!-- Авторизация -->
+                    <TextBlock Text="1. АВТОРИЗАЦИЯ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="Войдите в систему, используя учётную запись администратора. После успешного входа откроется главное окно с боковым меню."
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Пользователи -->
+                    <TextBlock Text="2. УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="- Для добавления нового пользователя нажмите кнопку в разделе"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Заполните форму (логин, пароль, ФИО, email, роль)"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Для редактирования нажмите на иконку редактирования"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Для удаления нажмите на иконку корзины и подтвердите"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Товары -->
+                    <TextBlock Text="3. УПРАВЛЕНИЕ ТОВАРАМИ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="- Для добавления товара нажмите кнопку в разделе"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Заполните поля: название, категория, бренд, цена, остаток, единица измерения"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Срок годности заполняется для продуктов с ограниченным сроком хранения"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Используйте поиск для быстрого нахождения товара"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Редактирование и удаление выполняется через иконки в таблице"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Категории -->
+                    <TextBlock Text="4. УПРАВЛЕНИЕ КАТЕГОРИЯМИ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="- Добавляйте, редактируйте и удаляйте категории товаров"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Каждая категория содержит название и описание"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Заказы -->
+                    <TextBlock Text="5. УПРАВЛЕНИЕ ЗАКАЗАМИ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="- В разделе отображаются все оформленные заказы"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- Можно редактировать и удалять заказы"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Отчёты -->
+                    <TextBlock Text="6. ОТЧЁТЫ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="- В разделе отображается общая статистика по продажам:"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="  - Общая выручка за выбранный период"
+                               TextWrapping="Wrap" Margin="10,0,0,2"/>
+                    <TextBlock Text="  - Количество заказов"
+                               TextWrapping="Wrap" Margin="10,0,0,2"/>
+                    <TextBlock Text="  - Количество проданных товаров"
+                               TextWrapping="Wrap" Margin="10,0,0,2"/>
+                    <TextBlock Text="  - Средний чек"
+                               TextWrapping="Wrap" Margin="10,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Поставщики и поступления -->
+                    <TextBlock Text="7. ПОСТАВЩИКИ И ПОСТУПЛЕНИЯ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="- В разделе Поставщики ведите справочник контрагентов"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- В разделе Поступления оформляйте приход товаров на склад"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="- При добавлении поступления выберите поставщика,"
+                               TextWrapping="Wrap" Margin="0,0,0,2"/>
+                    <TextBlock Text="  добавьте товары с указанием количества и цены закупки"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Остатки и сроки годности -->
+                    <TextBlock Text="8. ОСТАТКИ И СРОКИ ГОДНОСТИ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="Раздел Остатки:"
+                               TextWrapping="Wrap" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBlock Text="- Автоматически показывает товары с низким остатком"
+                               TextWrapping="Wrap" Margin="0,0,0,2"/>
+                    <TextBlock Text="- Статус Критический - остаток менее 5 единиц"
+                               TextWrapping="Wrap" Margin="0,0,0,2"/>
+                    <TextBlock Text="- Статус Низкий - остаток от 5 до 10 единиц"
+                               TextWrapping="Wrap" Margin="0,0,0,3"/>
+                    <TextBlock Text="Раздел Просроченные:"
+                               TextWrapping="Wrap" Margin="0,5,0,3" FontWeight="SemiBold"/>
+                    <TextBlock Text="- Показывает товары с истёкшим сроком годности"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                    <Border BorderBrush="#ECF0F1" BorderThickness="0,1" Margin="0,10"/>
+
+                    <!-- Завершение работы -->
+                    <TextBlock Text="9. ЗАВЕРШЕНИЕ РАБОТЫ" FontSize="15" FontWeight="Bold"
+                               Foreground="#E74C3C" Margin="0,10,0,5"/>
+                    <TextBlock Text="Нажмите кнопку Выход для завершения сеанса и возврата на экран входа."
+                               TextWrapping="Wrap" Margin="0,0,0,20"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Кнопка закрытия -->
+            <Border Grid.Row="2" Background="#ECF0F1" CornerRadius="0,0,10,10" Padding="10">
+                <Button Content="Закрыть" Width="100" Height="35" HorizontalAlignment="Right"
+                        Background="#3498DB" Foreground="White" FontWeight="SemiBold"
+                        Cursor="Hand" Click="BtnClose_Click"/>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

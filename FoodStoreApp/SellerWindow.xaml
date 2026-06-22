@@ -1,0 +1,249 @@
+﻿<Window x:Class="MMarketApp.SellerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="М-Маркет - Продавец" Height="720" Width="1250"
+        WindowStartupLocation="CenterScreen"
+        Background="#f5f6fa">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#2c3e50">
+            <Grid Margin="20,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="#e74c3c" CornerRadius="8" Padding="15,8">
+                        <TextBlock Text="М-МАРКЕТ" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <TextBlock Text="Продавец" FontSize="16" Foreground="#bdc3c7" 
+                               VerticalAlignment="Center" Margin="15,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <StackPanel Margin="0,0,20,0">
+                        <TextBlock x:Name="lblUser" Text="" FontSize="13" Foreground="White"/>
+                        <TextBlock x:Name="lblShift" Text="" FontSize="11" Foreground="#95a5a6"/>
+                    </StackPanel>
+                    <Button x:Name="btnAbout" Content="ℹ️" Width="35" Height="35" 
+                            Background="#3498db" Foreground="White" FontSize="16" 
+                            ToolTip="О программе" Click="BtnAbout_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="btnHelp" Content="❓" Width="35" Height="35" 
+                            Background="#27ae60" Foreground="White" FontSize="16" 
+                            ToolTip="Руководство кассира" Click="BtnHelp_Click" Margin="0,0,10,0"/>
+                    <Button Content="Выход" Width="90" Height="36" Background="#e74c3c" 
+                            Foreground="White" FontWeight="SemiBold" Cursor="Hand" Click="BtnLogout_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                <Button x:Name="btnSales" Content="Продажа" Width="120" Height="40"
+                        Background="#2c3e50" Foreground="White" FontWeight="Bold"
+                        Cursor="Hand" Click="BtnSales_Click" Margin="0,0,10,0"/>
+                <Button x:Name="btnChecks" Content="Чеки" Width="120" Height="40"
+                        Background="#34495e" Foreground="White" FontWeight="Bold"
+                        Cursor="Hand" Click="BtnChecks_Click" Margin="0,0,10,0"/>
+                <Button x:Name="btnExpired" Content="Просроченные" Width="120" Height="40"
+                        Background="#c0392b" Foreground="White" FontWeight="Bold"
+                        Cursor="Hand" Click="BtnExpired_Click"/>
+            </StackPanel>
+
+            <Grid x:Name="panelSales" Grid.Row="1" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="420"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="White" CornerRadius="12" Padding="15">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Каталог товаров" FontSize="18" FontWeight="Bold" Foreground="#2c3e50" Margin="0,0,0,15"/>
+
+                        <Grid Grid.Row="1" Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="130"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtSearch" Height="38" FontSize="13" Padding="10,0" 
+                                     VerticalContentAlignment="Center" BorderBrush="#dfe6e9" BorderThickness="1"
+                                     TextChanged="TxtSearch_TextChanged"/>
+                            <ComboBox x:Name="cmbCategory" Grid.Column="1" Height="38" Margin="10,0,0,0" 
+                                      FontSize="12" SelectionChanged="CmbCategory_SelectionChanged"/>
+                        </Grid>
+
+                        <DataGrid x:Name="dgProducts" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True"
+                                  FontSize="12" RowHeight="38" SelectionChanged="DgProducts_SelectionChanged"
+                                  MouseDoubleClick="DgProducts_MouseDoubleClick"
+                                  GridLinesVisibility="Horizontal" BorderThickness="0"
+                                  Background="White" AlternatingRowBackground="#f8f9fa"
+                                  HorizontalGridLinesBrush="#ecf0f1"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="1" Background="White" CornerRadius="12" Padding="18" Margin="12,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Текущий чек" FontSize="18" FontWeight="Bold" Foreground="#2c3e50" Margin="0,0,0,15"/>
+
+                        <ComboBox x:Name="cmbPayment" Grid.Row="1" Height="32" FontSize="12" SelectedIndex="0" Margin="0,0,0,12">
+                            <ComboBoxItem Content="Наличные"/>
+                            <ComboBoxItem Content="Карта"/>
+                            <ComboBoxItem Content="QR-код"/>
+                        </ComboBox>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                            <Button x:Name="btnLayaway" Content="Отложить чек" Width="110" Height="36" FontSize="12"
+                                    Background="#9b59b6" Foreground="White" Cursor="Hand" Click="BtnLayaway_Click" Margin="0,0,10,0"/>
+                            <Button x:Name="btnRecallLayaway" Content="Вернуть отложенный" Width="150" Height="36" FontSize="12"
+                                    Background="#e67e22" Foreground="White" Cursor="Hand" Click="BtnRecallLayaway_Click"/>
+                        </StackPanel>
+
+                        <DataGrid x:Name="dgCart" Grid.Row="3" AutoGenerateColumns="False"
+                                  FontSize="12" RowHeight="36"
+                                  GridLinesVisibility="Horizontal" BorderThickness="0"
+                                  Background="White" AlternatingRowBackground="#f8f9fa"
+                                  HorizontalGridLinesBrush="#ecf0f1"/>
+
+                        <Border Grid.Row="4" Background="#2c3e50" CornerRadius="8" Padding="15" Margin="0,12,0,12">
+                            <Grid>
+                                <TextBlock Text="ИТОГО" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock x:Name="lblTotal" Text="0 ₽" FontSize="22" FontWeight="Bold"
+                                           Foreground="#e74c3c" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Очистить" Height="42" FontSize="13" FontWeight="SemiBold"
+                                    Background="#95a5a6" Foreground="White" Cursor="Hand" Click="BtnClearCart_Click"/>
+                            <Button Grid.Column="2" Content="ПРОДАТЬ" Height="42" FontSize="14" FontWeight="Bold"
+                                    Background="#27ae60" Foreground="White" Cursor="Hand" Click="BtnSell_Click"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="panelChecks" Grid.Row="1" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="White" CornerRadius="12" Padding="15" Margin="0,0,0,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="История чеков" FontSize="18" FontWeight="Bold" Foreground="#2c3e50"/>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <DatePicker x:Name="dpDateFrom" Width="120" Margin="0,0,10,0"/>
+                            <DatePicker x:Name="dpDateTo" Width="120" Margin="0,0,10,0"/>
+                            <Button Content="Поиск" Width="80" Height="32" Background="#3498db" Foreground="White"
+                                    Cursor="Hand" Click="BtnSearchOrders_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <DataGrid x:Name="dgOrders" Grid.Row="1" AutoGenerateColumns="False"
+                          FontSize="12" RowHeight="38" SelectionChanged="DgOrders_SelectionChanged"
+                          GridLinesVisibility="Horizontal" BorderThickness="0"
+                          Background="White" AlternatingRowBackground="#f8f9fa"
+                          HorizontalGridLinesBrush="#ecf0f1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№ чека" Binding="{Binding ordernumber}" Width="120"/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding orderdate}" Width="140"/>
+                        <DataGridTextColumn Header="Сумма" Binding="{Binding totalamount}" Width="100"/>
+                        <DataGridTextColumn Header="Оплата" Binding="{Binding paymentmethod}" Width="80"/>
+                        <DataGridTextColumn Header="Продавец" Binding="{Binding sellername}" Width="150"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Border x:Name="panelOrderDetails" Grid.Row="2" Background="White" CornerRadius="12" Padding="15" Margin="0,12,0,0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Детали чека" FontSize="16" FontWeight="Bold" Foreground="#2c3e50" Margin="0,0,0,10"/>
+
+                        <DataGrid x:Name="dgOrderDetails" Grid.Row="1" AutoGenerateColumns="False" Height="150"
+                                  FontSize="12" RowHeight="32"
+                                  GridLinesVisibility="Horizontal" BorderThickness="0"
+                                  Background="White" AlternatingRowBackground="#f8f9fa">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Товар" Binding="{Binding productname}" Width="200"/>
+                                <DataGridTextColumn Header="Кол-во" Binding="{Binding quantity}" Width="80"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding unitprice}" Width="100"/>
+                                <DataGridTextColumn Header="Сумма" Binding="{Binding totalprice}" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Grid.Row="2" Content="Вернуть товар" Width="150" Height="35" Margin="0,10,0,0"
+                                Background="#e67e22" Foreground="White" FontWeight="Bold" Cursor="Hand"
+                                HorizontalAlignment="Right" Click="BtnReturnOrder_Click"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="panelExpired" Grid.Row="1" Visibility="Collapsed">
+                <Border Background="White" CornerRadius="12" Padding="15">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="Просроченные товары" FontSize="18" FontWeight="Bold" Foreground="#2c3e50"/>
+                            <Button Content="Обновить" Width="100" Height="32" Background="#3498db" Foreground="White"
+                                    Cursor="Hand" Click="BtnRefreshExpired_Click" Margin="30,0,0,0"/>
+                        </StackPanel>
+
+                        <DataGrid x:Name="dgExpiredProducts" Grid.Row="1" AutoGenerateColumns="False"
+                                  FontSize="12" RowHeight="38"
+                                  GridLinesVisibility="Horizontal" BorderThickness="0"
+                                  Background="White" AlternatingRowBackground="#f8f9fa"
+                                  HorizontalGridLinesBrush="#ecf0f1">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="200"/>
+                                <DataGridTextColumn Header="Категория" Binding="{Binding CategoryName}" Width="130"/>
+                                <DataGridTextColumn Header="Остаток" Binding="{Binding stock}" Width="80"/>
+                                <DataGridTextColumn Header="Ед." Binding="{Binding unit}" Width="50"/>
+                                <DataGridTextColumn Header="Срок годности" Binding="{Binding expirydate}" Width="130"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

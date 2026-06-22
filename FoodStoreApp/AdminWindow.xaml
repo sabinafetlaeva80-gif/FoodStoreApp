@@ -1,0 +1,164 @@
+﻿<Window x:Class="MMarketApp.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="М-Маркет - Администратор" Height="750" Width="1250"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <Border Background="#2c3e50">
+            <Grid Margin="20,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="#e74c3c" CornerRadius="8" Padding="15,8">
+                        <TextBlock Text="М-МАРКЕТ" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+                    <TextBlock Text="Администратор" FontSize="16" Foreground="#bdc3c7" 
+                               VerticalAlignment="Center" Margin="15,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock x:Name="lblUser" Text="" FontSize="13" Foreground="White" Margin="0,0,20,0"/>
+                    <Button x:Name="btnAbout" Content="ℹ️" Width="35" Height="35" 
+                            Background="#3498db" Foreground="White" FontSize="16" 
+                            ToolTip="О программе" Click="BtnAbout_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="btnHelp" Content="❓" Width="35" Height="35" 
+                            Background="#27ae60" Foreground="White" FontSize="16" 
+                            ToolTip="Руководство администратора" Click="BtnHelp_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="btnLogout" Content="Выход" Width="90" Height="36" 
+                            Background="#e74c3c" Foreground="White" FontWeight="SemiBold" 
+                            Cursor="Hand" Click="BtnLogout_Click" Margin="0,0,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Боковое меню -->
+            <Border Background="#34495e">
+                <StackPanel Margin="10">
+                    <Button Content="Пользователи" Click="BtnUsers_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Товары" Click="BtnProducts_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Категории" Click="BtnCategories_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Заказы" Click="BtnOrders_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Отчеты" Click="BtnReports_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Поставщики" Click="BtnSuppliers_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Поступления" Click="BtnSupply_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Остатки" Click="BtnLowStock_Click" Height="40" Margin="0,5"/>
+                    <Button Content="Просроченные" Click="BtnExpiredProducts_Click" Height="40" Margin="0,5"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Панели -->
+            <Border Grid.Column="1" Background="White" Padding="20">
+                <StackPanel>
+                    <!-- Панель Пользователи -->
+                    <StackPanel x:Name="panelUsers" Visibility="Visible">
+                        <TextBlock Text="Управление пользователями" FontSize="20" FontWeight="Bold"/>
+                        <Button x:Name="btnAddUser" Content="Добавить пользователя" Click="BtnAddUser_Click" Margin="0,10,0,10" Width="180"/>
+                        <DataGrid x:Name="dgUsers" Height="500"/>
+                    </StackPanel>
+
+                    <!-- Панель Товары -->
+                    <StackPanel x:Name="panelProducts" Visibility="Collapsed">
+                        <TextBlock Text="Управление товарами" FontSize="20" FontWeight="Bold"/>
+                        <TextBox x:Name="txtSearch" Margin="0,10,0,10" Width="300" TextChanged="TxtSearch_TextChanged"/>
+                        <DataGrid x:Name="dgProducts" Height="500"/>
+                    </StackPanel>
+
+                    <!-- Панель Категории -->
+                    <StackPanel x:Name="panelCategories" Visibility="Collapsed">
+                        <TextBlock Text="Управление категориями" FontSize="20" FontWeight="Bold"/>
+                        <DataGrid x:Name="dgCategories" Height="500"/>
+                    </StackPanel>
+
+                    <!-- Панель Заказы -->
+                    <StackPanel x:Name="panelOrders" Visibility="Collapsed">
+                        <TextBlock Text="Управление заказами" FontSize="20" FontWeight="Bold"/>
+                        <DataGrid x:Name="dgOrders" Height="500"/>
+                    </StackPanel>
+
+                    <!-- Панель Отчеты -->
+                    <StackPanel x:Name="panelReports" Visibility="Collapsed">
+                        <TextBlock Text="Отчеты" FontSize="20" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,15">
+                            <DatePicker x:Name="dpReportFrom" Width="130" Margin="0,0,10,0"/>
+                            <TextBlock Text="по" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <DatePicker x:Name="dpReportTo" Width="130" Margin="0,0,10,0"/>
+                            <Button Content="Показать" Width="80" Height="32" Background="#3498db" Foreground="White" Click="BtnShowReport_Click"/>
+                        </StackPanel>
+                        <Grid Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#3498db" Padding="20" Margin="5">
+                                <StackPanel>
+                                    <TextBlock Text="Выручка" Foreground="White"/>
+                                    <TextBlock x:Name="lblTotalRevenue" Text="0 ₽" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="#27ae60" Padding="20" Margin="5" Grid.Column="1">
+                                <StackPanel>
+                                    <TextBlock Text="Заказов" Foreground="White"/>
+                                    <TextBlock x:Name="lblTotalOrders" Text="0" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="#e67e22" Padding="20" Margin="5" Grid.Row="1">
+                                <StackPanel>
+                                    <TextBlock Text="Товаров" Foreground="White"/>
+                                    <TextBlock x:Name="lblTotalItems" Text="0" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="#9b59b6" Padding="20" Margin="5" Grid.Row="1" Grid.Column="1">
+                                <StackPanel>
+                                    <TextBlock Text="Ср. чек" Foreground="White"/>
+                                    <TextBlock x:Name="lblAvgOrder" Text="0 ₽" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Панель Поставщики -->
+                    <StackPanel x:Name="panelSuppliers" Visibility="Collapsed">
+                        <TextBlock Text="Поставщики" FontSize="20" FontWeight="Bold"/>
+                        <Button Content="Добавить поставщика" Click="BtnAddSupplier_Click" Margin="0,10,0,10" Width="180"/>
+                        <DataGrid x:Name="dgSuppliers" Height="450"/>
+                    </StackPanel>
+
+                    <!-- Панель Поступления -->
+                    <StackPanel x:Name="panelSupply" Visibility="Collapsed">
+                        <TextBlock Text="Поступления" FontSize="20" FontWeight="Bold"/>
+                        <Button Content="Новое поступление" Click="BtnNewSupply_Click" Margin="0,10,0,10" Width="180"/>
+                        <DataGrid x:Name="dgSupplyHistory" Height="450"/>
+                    </StackPanel>
+
+                    <!-- Панель Низкие остатки -->
+                    <StackPanel x:Name="panelLowStock" Visibility="Collapsed">
+                        <TextBlock Text="Низкие остатки" FontSize="20" FontWeight="Bold"/>
+                        <DataGrid x:Name="dgLowStock" Height="500"/>
+                    </StackPanel>
+
+                    <!-- Панель Просроченные товары -->
+                    <StackPanel x:Name="panelExpired" Visibility="Collapsed">
+                        <TextBlock Text="Просроченные товары" FontSize="20" FontWeight="Bold"/>
+                        <DataGrid x:Name="dgExpired" Height="500"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
